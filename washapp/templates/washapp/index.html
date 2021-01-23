@@ -1,7 +1,36 @@
 {% extends 'washapp/base.html' %}
 
 {% block content %}
+    <div>
+        <h2>Cars on parking</h2>
 
-    <h1>Hello</h1>
+        <ul>
+            {% for car in cars %}
+
+                <li>{{ car }}</li>
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>
+            {% if booths %}
+
+                Available Booths:
+
+            {% else %}
+                No Booth Available
+            {% endif %}
+        </h2>
+
+        <ul>
+            {% for booth in booths %}
+
+                <li>Number: {{ booth }}</li>
+
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock content %}
