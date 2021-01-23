@@ -34,3 +34,19 @@ class Permission(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class CarWashBooth(models.Model):
+    occupied = models.BooleanField(blank=True)
+    occupant = models.ForeignKey(to='washapp.Employee', on_delete=models.PROTECT, null=True, blank=True)
+    car = models.ForeignKey(to='washapp.Car', on_delete=models.PROTECT, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Car(models.Model):
+    license_plate = models.CharField(max_length=7)
+
+    def __str__(self):
+        return self.license_plate
