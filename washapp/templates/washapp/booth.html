@@ -4,7 +4,10 @@
 
     <header style="display: flex; justify-content: space-between; padding: 25px;">
         <h2>Booth Number: {{ booth }}</h2>
-        {% include 'washapp/components/return_button.html' %}
+        <div>
+            <a href={% url 'dashboard' %}><button >Back</button></a>
+            {% include 'washapp/components/return_button.html' %}
+        </div>
     </header>
 
 {% endblock content %}
