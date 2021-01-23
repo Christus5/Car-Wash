@@ -5,7 +5,7 @@ from django.db import models
 class Employee(models.Model):
     full_name = models.CharField(max_length=100)
 
-    role = models.ForeignKey(to='washapp.Role', on_delete=models.PROTECT)
+    role = models.OneToOneField(to='washapp.Role', on_delete=models.PROTECT)
     hired_date = models.DateField('Date Hired')
 
     created = models.DateTimeField(auto_now_add=True, verbose_name='Added to DB')
@@ -38,8 +38,8 @@ class Permission(models.Model):
 
 class CarWashBooth(models.Model):
     occupied = models.BooleanField(blank=True)
-    occupant = models.ForeignKey(to='washapp.Employee', on_delete=models.PROTECT, null=True, blank=True, unique=True)
-    car = models.ForeignKey(to='washapp.Car', on_delete=models.PROTECT, null=True, blank=True, unique=True)
+    occupant = models.OneToOneField(to='washapp.Employee', on_delete=models.PROTECT, null=True, blank=True, unique=True)
+    car = models.OneToOneField(to='washapp.Car', on_delete=models.PROTECT, null=True, blank=True, unique=True)
 
     def __str__(self):
         return str(self.id)
