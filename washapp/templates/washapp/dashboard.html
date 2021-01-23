@@ -1,0 +1,41 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <header class="dashboard-header">
+        <h1>Dashboard</h1>
+        {% include 'washapp/components/return_button.html' %}
+    </header>
+
+    <section>
+        <div class="booths">
+            <h2>
+                {% if booths %}
+
+                    Available Booths
+
+                {% else %}
+                    No Booth Available
+                {% endif %}
+            </h2>
+
+            <div class="grid">
+                {% for booth in booths %}
+
+                    <div class="card">
+                        Number: {{ booth }}
+                        <a href={% url 'booth' booth.pk %}>
+                            <button>
+                                Enter
+                            </button>
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}

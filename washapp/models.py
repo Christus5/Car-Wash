@@ -46,7 +46,7 @@ class CarWashBooth(models.Model):
 
 
 class Car(models.Model):
-    license_plate = models.CharField(max_length=7)
+    license_plate = models.CharField(max_length=7, unique=True)
 
     def __str__(self):
         return self.license_plate

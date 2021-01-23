@@ -1,36 +1,39 @@
 {% extends 'washapp/base.html' %}
 
 {% block content %}
-    <div>
-        <h2>Cars on parking</h2>
-
-        <ul>
-            {% for car in cars %}
-
-                <li>{{ car }}</li>
-
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div>
+    <div class="grid">
         <h2>
-            {% if booths %}
-
-                Available Booths:
-
+            Status:
+            {% if working %}
+                <span class="success">Working</span>
             {% else %}
-                No Booth Available
+                <span class="error">Out of Order</span>
             {% endif %}
         </h2>
 
-        <ul>
-            {% for booth in booths %}
+        <h2>
+            Availability:
+            {% if booths %}
+                <span class="success">{{ booths }} Booth(s) are available</span>
+            {% else %}
+                <span class="error">Not Available</span>
+            {% endif %}
 
-                <li>Number: {{ booth }}</li>
-
-            {% endfor %}
-        </ul>
+        </h2>
     </div>
 
+
+
+    <form class="login-form" method="post">{% csrf_token %}
+        <h2>Enter Car Credentials</h2>
+        <div class="login-field-wrapper">
+            {{ car_form }}
+
+        </div>
+        <div class="login-field-wrapper">
+            <button type="submit">Proceed</button>
+        </div>
+    </form>
+
 {% endblock content %}
+

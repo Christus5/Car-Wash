@@ -1,0 +1,10 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <header style="display: flex; justify-content: space-between; padding: 25px;">
+        <h2>Booth Number: {{ booth }}</h2>
+        {% include 'washapp/components/return_button.html' %}
+    </header>
+
+{% endblock content %}
