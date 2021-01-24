@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from .models import (CarWashBooth, Car)
+from .models import CarWashBooth
+from .models import Car
 from .forms import CarForm
 
 
@@ -15,7 +16,7 @@ def index_view(request, *args, **kwargs):
         return HttpResponseRedirect('dashboard')
 
     context = {
-        'booths': len(CarWashBooth.objects.filter(occupied=False)),
+        'booths': (CarWashBooth.objects.filter(occupied=False)).count(),
         'working': True,
         'car_form': form
     }
