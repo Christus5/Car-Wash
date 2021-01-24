@@ -1,9 +1,10 @@
 from django.contrib import admin
 
-from .models import (
-    Employee, Permission, Role,
-    Car, CarWashBooth
-)
+from .models import Employee
+from .models import Permission
+from .models import Role
+from .models import Car
+from .models import CarWashBooth
 
 
 # Register your models here.
@@ -11,7 +12,4 @@ from .models import (
 class EmployeeAdminModel(admin.ModelAdmin):
     readonly_fields = ['created']
 
-admin.site.register(Permission)
-admin.site.register(Role)
-admin.site.register(Car)
-admin.site.register(CarWashBooth)
+admin.site.register([Permission, Role, Car, CarWashBooth])
