@@ -38,8 +38,8 @@ class Permission(models.Model):
 
 class CarWashBooth(models.Model):
     occupied = models.BooleanField(blank=True)
-    occupant = models.OneToOneField(to='washapp.Employee', on_delete=models.PROTECT, null=True, blank=True, unique=True)
-    car = models.OneToOneField(to='washapp.Car', on_delete=models.PROTECT, null=True, blank=True, unique=True)
+    occupant = models.OneToOneField(to='washapp.Employee', on_delete=models.PROTECT, null=True, blank=True)
+    car = models.OneToOneField(to='washapp.Car', on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
