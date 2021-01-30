@@ -8,33 +8,14 @@
     </header>
 
     <section>
-        <div class="booths">
-            <h2>
-                {% if booths %}
+        <header>
+            <h3>Employees</h3>
+        </header>
+        <section>
+            {% for order in orders %}
 
-                    Available Booths
-
-                {% else %}
-                    No Booth Available
-                {% endif %}
-            </h2>
-
-            <div class="grid">
-                {% for booth in booths %}
-
-                    <div class="card">
-                        Number: {{ booth }}
-                        <a href={% url 'booth' booth.pk %}>
-                            <button>
-                                Enter
-                            </button>
-                        </a>
-
-                    </div>
-
-                {% endfor %}
-            </div>
-        </div>
+            {% endfor %}
+        </section>
     </section>
 
 

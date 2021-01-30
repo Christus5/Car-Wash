@@ -93,9 +93,9 @@ li {
 }
 
 .dashboard-header button:hover {
-    background-color: var(--red);
-    border: 1px solid var(--red);
-    box-shadow: 0 0 20px 5px var(--red);
+    background-color: var(--light-green);
+    border: 1px solid var(--light-green);
+    box-shadow: 0 0 20px 5px var(--light-green);
 }
 
 .booths {

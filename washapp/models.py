@@ -2,46 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-class Company(models.Model):
-    name = models.CharField(max_length=100)
-    booths = models.ManyToManyField(to='washapp.CarWashBooth', related_name='booths', through='washapp.BoothToCompany')
-    employees = models.ManyToManyField(to='washapp.Employee', through='washapp.EmployeeToCompany')
-    orders = models.ManyToManyField(to='washapp.Order', through='washapp.OrderToCompany')
-
-    class Meta:
-        verbose_name_plural = "Companies"
-
-    def __str__(self):
-        return self.name
-
-
-class BoothToCompany(models.Model):
-    company = models.ForeignKey(to='washapp.Company', on_delete=models.PROTECT)
-    booth = models.OneToOneField(to='washapp.CarWashBooth', on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = "Booth"
-        verbose_name_plural = "Booths"
-
-
-class EmployeeToCompany(models.Model):
-    employee = models.OneToOneField(to='washapp.Employee', on_delete=models.CASCADE)
-    company = models.ForeignKey(to='washapp.Company', on_delete=models.PROTECT)
-
-    class Meta:
-        verbose_name = 'Employee'
-        verbose_name_plural = 'Employees'
-
-
-class OrderToCompany(models.Model):
-    order = models.OneToOneField(to='washapp.Order', on_delete=models.CASCADE)
-    company = models.ForeignKey(to='washapp.Company', on_delete=models.PROTECT)
-
-    class Meta:
-        verbose_name = "Order"
-        verbose_name_plural = "Orders"
-
-
 class Employee(models.Model):
     full_name = models.CharField(max_length=100)
 
@@ -68,10 +28,10 @@ class Car(models.Model):
 
 
 class Order(models.Model):
-    car = models.ForeignKey(to='washapp.Car', on_delete=models.PROTECT)
-    wash_booth = models.ForeignKey(to='washapp.CarWashBooth', on_delete=models.PROTECT)
-    washer = models.ForeignKey(to='washapp.Employee', on_delete=models.CASCADE)
-    price = models.PositiveSmallIntegerField()
+    car = models.ForeignKey(to='Car', on_delete=models.PROTECT)
+    wash_booth = models.ForeignKey(to='CarWashBooth', on_delete=models.PROTECT)
+    washer = models.ForeignKey(to='Employee', on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     requested = models.DateTimeField()
     completed = models.DateTimeField()
 
@@ -79,4 +39,4 @@ class Order(models.Model):
         unique_together = [['washer', 'wash_booth', 'requested', 'car']]
 
     def __str__(self):
-        return str(self.pk)
+        return self.car

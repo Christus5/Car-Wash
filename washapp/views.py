@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import CarWashBooth
 from .models import Car
 from .forms import CarForm
+from .models import Order
 
 
 # Create your views here.
@@ -25,7 +26,8 @@ def index_view(request, *args, **kwargs):
 def dashboard_view(request, *args, **kwargs):
     context = {
         'cars': Car.objects.all(),
-        'booths': CarWashBooth.objects.filter(occupied=False)
+        'booths': CarWashBooth.objects.filter(occupied=False),
+        'orders': Order.objects.all()
     }
     return render(request, 'washapp/dashboard.html', context)
 
