@@ -1,43 +1,31 @@
 {% extends 'washapp/base.html' %}
-]
 
 {% block content %}
-    <div style="text-align: center;">
-        <h2>
-            Status:
-            {% if working %}
-                <span class="success">Working</span>
-            {% else %}
-                <span class="error">Out of Order</span>
-            {% endif %}
-        </h2>
+    <div>
+        <header>
+            <h1>Dashboard</h1>
+        </header>
 
-        <h2>
-            Availability:
-            {% if booths %}
-                <span class="success">{{ booths }} Booth(s) are available</span>
-            {% else %}
-                <span class="error">Not Available</span>
-            {% endif %}
+        <section>
+            <header>
+                <h2>Employees</h2>
+            </header>
+            <section class="grid">
+                {% for employee in employees %}
+                    <div class="card">
+                        <header>
+                            <h3>{{ employee }}</h3>
+                        </header>
+                        <section>
 
-        </h2>
+                        </section>
+                        <footer>
+                            <a href="{% url 'detail' employee.pk %}">Details</a>
+                        </footer>
+                    </div>
+                {% endfor %}
+            </section>
+        </section>
+
     </div>
-
-
-
-    <form class="login-form" method="post">{% csrf_token %}
-        <h2>Enter Car Credentials</h2>
-        <div class="login-field-wrapper">
-            {{ car_form }}
-
-        </div>
-        <div class="login-field-wrapper">
-            <button class="btn" type="submit">Proceed</button>
-        </div>
-    </form>
-    <div style="text-align: center; margin: 25px;">
-        <a href="/dashboard"><button class="btn">Proceed Without Car</button></a>
-    </div>
-
-{% endblock content %}
-
+{% endblock %}

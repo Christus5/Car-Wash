@@ -1,0 +1,22 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+    <div>
+        <header>
+            <h1>Employee details</h1>
+        </header>
+        <h2>{{ employee }}</h2>
+
+        {% for order in employee.order_set.all %}
+            <div>
+                {{ order }}
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+{% endblock %}
