@@ -4,19 +4,51 @@
     <div>
         <header>
             <h1>Employee details</h1>
-        </header>
-        <h2>{{ employee }}</h2>
+            <a href="{% url 'index' %}">Dashboard</a>
 
-        {% for order in employee.order_set.all %}
+        </header>
+        <h2>{{ employee|capfirst }}</h2>
+        <div class="orders">
             <div>
-                {{ order }}
+                <select id="order_filter">
+                    <option selected value="0">All</option>
+                    <option value="1">Day</option>
+
+                </select>
+                <button onclick="changeOrdersView(document.getElementById('order_filter').value)">Apply</button>
             </div>
 
-        {% endfor %}
+            <h2>orders by day</h2>
+            <div class="table" id="orders_day_id">
+                {% for order in employee.orders_by_day %}
+                    {{ order }}
+                    <br/>
+                {% endfor %}
+            </div>
+            <h2>orders by week</h2>
+
+            <div class="table" id="orders_day_week">
+                {% for order in employee.orders_by_week %}
+                    {{ order }}
+                    <br/>
+                {% endfor %}
+            </div>
+            <h2>orders by month</h2>
+            <div class="table" id="orders_day_month">
+                {% for order in employee.orders_by_month %}
+                    {{ order }}
+                    <br/>
+                {% endfor %}
+            </div>
+        </div>
 
 
     </div>
-
-
-
-{% endblock %}
+    <script>
+        const changeOrdersView = (view = 1) => {
+            if(view == '0'){
+                document.getElementById('orders_day_id').style = 'display: none;';
+            }
+        }
+    </script>
+{% endblock content %}

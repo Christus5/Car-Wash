@@ -9,8 +9,21 @@ from django.utils import timezone
 class Employee(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    share = models.PositiveSmallIntegerField(default=45)
 
     created = models.DateTimeField(auto_now_add=True, verbose_name='Hired')
+
+    def orders_by_day(self):
+        orders = self.order_set.all()
+        return [order for order in orders if order.completed >= timezone.now() - timezone.timedelta(days=1)]
+
+    def orders_by_week(self):
+        orders = self.order_set.all()
+        return [order for order in orders if order.completed >= timezone.now() - timezone.timedelta(days=7)]
+
+    def orders_by_month(self):
+        orders = self.order_set.all()
+        return [order for order in orders if order.completed >= timezone.now() - timezone.timedelta(days=30)]
 
     def __str__(self):
         return f"{self.name}  {self.last_name}"
@@ -46,9 +59,6 @@ class Order(models.Model):
 
     class Meta:
         unique_together = [['washer', 'wash_booth', 'requested', 'car']]
-
-    def is_recent_day(self):
-        return self.completed >= timezone.now() - timezone.timedelta(days=1)
 
     def __str__(self):
         return f"{self.car} : {self.requested.date()}"
