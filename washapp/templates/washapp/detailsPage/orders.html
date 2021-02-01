@@ -1,0 +1,101 @@
+<div id="orders_default_id">
+{#    <h2>Orders</h2>#}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Car</th>
+            <th>Booth</th>
+            <th>Washer</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in employee.order_set.all %}
+            <tr>
+                <td>{{ order.pk }}</td>
+                <td>{{ order.car }}</td>
+                <td>{{ order.wash_booth }}</td>
+                <td>{{ order.washer }}</td>
+                <td>{{ order.price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="orders_day_id" style="display: none;">
+{#    <h2>Orders by day</h2>#}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Car</th>
+            <th>Booth</th>
+            <th>Washer</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in employee.orders_by_day %}
+            <tr>
+                <td>{{ order.pk }}</td>
+                <td>{{ order.car }}</td>
+                <td>{{ order.wash_booth }}</td>
+                <td>{{ order.washer }}</td>
+                <td>{{ order.price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="orders_day_week" style="display: none;">
+{#    <h2>Orders by week</h2>#}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Car</th>
+            <th>Booth</th>
+            <th>Washer</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in employee.orders_by_week %}
+            <tr>
+                <td>{{ order.pk }}</td>
+                <td>{{ order.car }}</td>
+                <td>{{ order.wash_booth }}</td>
+                <td>{{ order.washer }}</td>
+                <td>{{ order.price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div id="orders_day_month" style="display: none;">
+    <!-- <h2>Orders by month</h2> -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Car</th>
+            <th>Booth</th>
+            <th>Washer</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in employee.orders_by_month %}
+            <tr>
+                <td>{{ order.pk }}</td>
+                <td>{{ order.car }}</td>
+                <td>{{ order.wash_booth }}</td>
+                <td>{{ order.washer }}</td>
+                <td>{{ order.price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
