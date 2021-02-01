@@ -86,8 +86,13 @@ a:hover {
     margin-top: 15px;
 }
 
-.page-content > h2 {
+.page-content  h2 {
     text-align: center;
+}
+
+.page-content > header > h2 {
+    text-align: center;
+    margin: 15px 0;
 }
 
 
@@ -111,5 +116,14 @@ a:hover {
 .orders > section {
     width: 70%;
     margin: 0 auto;
+}
+
+#employees-table {
+    width: 70%;
+}
+
+#employees-table a {
+    color: black;
+    font-size: 1em;
 }
 
