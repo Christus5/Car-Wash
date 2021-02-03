@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --gray-blue: #919cb0;
+    --gray-blue-dark: #4f4f7e;
+    --blue: #2a58ff;
+    --graphite: #242428;
+    --lime: #69ff2f;
+}
+
+button {
+    padding: 15px;
+    background-color: var(--graphite);
+    color: white;
+    cursor: pointer;
+    border: 1px solid var(--graphite);
+    transition: 0.3s ease-out;
+    box-shadow: 0 0 20px -5px black;
+    border-radius: 5px;
+    outline: none;
+}
+
+button:hover {
+    border: 1px solid var(--lime);
+    box-shadow: 0 0 20px -5px var(--lime);
+    background-color: var(--blue);
+    color: white;
+}
+
+button:active {
+    transform: scale(0.7);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.3em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.table {
+    border-collapse: collapse;
+    box-shadow: 0 0 10px -5px black;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table > thead {
+    text-align: left;
+    color: var(--gray-blue-dark);
+    background-color: var(--gray-blue);
+}
+
+.table tr {
+    border-bottom: 1px solid var(--gray-blue);
+}
+
+.table th,
+.table td {
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.page-header {
+    display: flex;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, var(--blue), var(--lime));
+    padding: 25px;
+    justify-content: space-between;
+    color: white;
+}
+
+.page-header a {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.page-content {
+    margin-top: 15px;
+}
+
+.page-content  h2 {
+    text-align: center;
+}
+
+.page-content > header > h2 {
+    text-align: center;
+    margin: 15px 0;
+}
+
+
+.orders {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.orders > header {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+#order_filter {
+    width: 25%;
+    margin-right: 15px;
+}
+
+.orders > section {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#employees-table {
+    width: 70%;
+}
+
+#employees-table a {
+    color: black;
+    font-size: 1em;
+}
+
