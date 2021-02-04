@@ -50,10 +50,16 @@ class Car(models.Model):
 
 
 class Order(models.Model):
+    STATUS = (
+        ('Completed', "Completed"),
+        ('Pending', "Pending")
+    )
+
     car = models.ForeignKey(to='Car', on_delete=models.PROTECT)
     wash_booth = models.ForeignKey(to='CarWashBooth', on_delete=models.PROTECT)
     washer = models.ForeignKey(to='Employee', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    status = models.CharField(choices=STATUS, max_length=100, default='Pending')
     requested = models.DateTimeField()
     completed = models.DateTimeField()
 
