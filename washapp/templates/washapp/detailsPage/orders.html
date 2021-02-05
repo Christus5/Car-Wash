@@ -1,5 +1,5 @@
 <div id="orders_default_id">
-{#    <h2>Orders</h2>#}
+    {#    <h2>Orders</h2>#}
     <table class="table">
         <thead>
         <tr>
@@ -8,6 +8,7 @@
             <th>Booth</th>
             <th>Washer</th>
             <th>Price</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -18,13 +19,24 @@
                 <td>{{ order.wash_booth }}</td>
                 <td>{{ order.washer }}</td>
                 <td>{{ order.price }}</td>
+                <td>
+                    {% if order.status == "Pending" %}
+                        <div class="status status-pending">
+                            {{ order.status }}
+                        </div>
+                    {% else %}
+                        <div class="status status-completed">
+                            {{ order.status }}
+                        </div>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
 <div id="orders_day_id" style="display: none;">
-{#    <h2>Orders by day</h2>#}
+    {#    <h2>Orders by day</h2>#}
     <table class="table">
         <thead>
         <tr>
@@ -49,7 +61,7 @@
     </table>
 </div>
 <div id="orders_day_week" style="display: none;">
-{#    <h2>Orders by week</h2>#}
+    {#    <h2>Orders by week</h2>#}
 
     <table class="table">
         <thead>

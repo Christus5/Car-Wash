@@ -9,6 +9,7 @@
     --blue: #2a58ff;
     --graphite: #242428;
     --lime: #69ff2f;
+    --yellow: #fff52a;
 }
 
 button {
@@ -86,7 +87,7 @@ a:hover {
     margin-top: 15px;
 }
 
-.page-content  h2 {
+.page-content h2 {
     text-align: center;
 }
 
@@ -125,5 +126,20 @@ a:hover {
 #employees-table a {
     color: black;
     font-size: 1em;
+}
+
+.status {
+    text-align: center;
+    padding: 0.4em;
+    border-radius: 5px;
+}
+
+.status-completed {
+    background-color: var(--lime);
+}
+
+.status-pending {
+    background-color: var(--yellow);
+
 }
 
