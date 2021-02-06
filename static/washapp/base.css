@@ -12,8 +12,14 @@
     --yellow: #fff52a;
 }
 
-button {
-    padding: 15px;
+body {
+    font-family: Arial,"Roboto", "Lucida Grande", Verdana, sans-serif;
+    font-weight: 700;
+    background: rgba(0, 0, 255, 0.7);
+}
+
+.btn {
+    padding: 0.5em;
     background-color: var(--graphite);
     color: white;
     cursor: pointer;
@@ -24,14 +30,14 @@ button {
     outline: none;
 }
 
-button:hover {
+.btn:hover {
     border: 1px solid var(--lime);
     box-shadow: 0 0 20px -5px var(--lime);
     background-color: var(--blue);
     color: white;
 }
 
-button:active {
+.btn:active {
     transform: scale(0.7);
 }
 
@@ -50,6 +56,7 @@ a:hover {
     box-shadow: 0 0 10px -5px black;
     width: 100%;
     margin: 0 auto;
+    background: white;
 }
 
 .table > thead {
@@ -69,12 +76,36 @@ a:hover {
 }
 
 .page-header {
-    display: flex;
     box-sizing: border-box;
-    background: linear-gradient(135deg, var(--blue), var(--lime));
-    padding: 25px;
+    margin: 5vh auto;
+    padding: 5px 25px;
+    width: 95%;
+    display: flex;
+    background: var(--graphite);
     justify-content: space-between;
     color: white;
+    box-shadow: 0 0 20px -5px black;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-bar button {
+    background-color: white;
+    color: var(--graphite);
+    padding: 0.7em;
+    box-shadow: 0 0 10px -5px var(--lime);
+
+}
+
+.search-bar input {
+    outline: none;
+    padding: 0.7em;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 0 10px -5px var(--lime);
 }
 
 .page-header a {

@@ -14,7 +14,7 @@ def index_view(request, *args, **kwargs):
     search = request.GET.get('name')
     employee_q = Q()
     if search:
-        employee_q &= Q(name__icontains=search[-1]) | Q(last_name__icontains=search[-1])
+        employee_q &= Q(name__icontains=search) | Q(last_name__icontains=search)
 
     context = {
         'employees': Employee.objects.filter(employee_q)
