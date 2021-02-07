@@ -29,6 +29,12 @@
 
                 </thead>
                 <tbody>
+                {% if not employees %}
+                    <td style="width: 100%;">
+                        <h3 style="text-align: center">No Data</h3>
+                    </td>
+                {% endif %}
+
                 {% for employee in employees %}
 
                     <tr class="card">
@@ -36,13 +42,15 @@
                             {{ employee }}
                         </td>
                         <td>
-                            <a href="{% url 'detail' employee.pk %}" class="btn">Details</a>
+                            <a href="{% url 'detail' employee.pk %}" style="color: white;" class="btn">Details</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
 
+
             </table>
+
         </section>
 
     </div>
