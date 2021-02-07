@@ -153,7 +153,8 @@ a:hover {
 }
 
 #employees-table {
-    width: 70%;
+    width: 90%;
+    margin: 25px auto;
 }
 
 #employees-table a {
@@ -176,3 +177,24 @@ a:hover {
 
 }
 
+.order-form-wrapper {
+    text-align: center;
+    margin: 0 auto;
+    width: 35%;
+    background: white;
+    box-sizing: border-box;
+    padding: 35px;
+    box-shadow: 0 0 20px -5px var(--graphite);
+    margin-bottom: 35px;
+}
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.order-form > *:not(label) {
+    padding: 0.4em 0;
+    margin: 5px 0;
+}

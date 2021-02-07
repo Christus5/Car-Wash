@@ -15,41 +15,57 @@
 
 
         <section class="page-content">
-            <header>
-                <h2>Employees</h2>
-            </header>
-            <table class="table" id="employees-table">
-                <thead>
-                <tr>
-                    <th>
-                        Employee
-                    </th>
-                    <th></th>
-                </tr>
+            <div class="order-form-wrapper">
+                <header>
+                    <h2>Place an Order</h2>
+                </header>
+                <section>
+                    <form class="order-form">
+                        {{ order_form }}
+                        <button type="submit" class="btn">Place</button>
+                    </form>
+                </section>
 
-                </thead>
-                <tbody>
-                {% if not employees %}
-                    <td style="width: 100%;">
-                        <h3 style="text-align: center">No Data</h3>
-                    </td>
-                {% endif %}
-
-                {% for employee in employees %}
-
-                    <tr class="card">
-                        <td>
-                            {{ employee }}
-                        </td>
-                        <td>
-                            <a href="{% url 'detail' employee.pk %}" style="color: white;" class="btn">Details</a>
-                        </td>
+            </div>
+            <div>
+                <header>
+                    <h2>Employees</h2>
+                </header>
+                <table class="table" id="employees-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Employee
+                        </th>
+                        <th></th>
                     </tr>
-                {% endfor %}
-                </tbody>
+
+                    </thead>
+                    <tbody>
+                    {% if not employees %}
+                        <td style="width: 100%;">
+                            <h3 style="text-align: center">No Data</h3>
+                        </td>
+                    {% endif %}
+
+                    {% for employee in employees %}
+
+                        <tr class="card">
+                            <td>
+                                {{ employee }}
+                            </td>
+                            <td>
+                                <a href="{% url 'detail' employee.pk %}" style="color: white;" class="btn">Details</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
 
 
-            </table>
+                </table>
+
+            </div>
+
 
         </section>
 

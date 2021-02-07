@@ -1,16 +1,9 @@
 from django import forms
 
-from .models import Car
+from .models import Order
 
 
-class CarForm(forms.ModelForm):
-    attributes = {
-        'placeholder': "AA000AA"
-    }
-    license_plate = forms.CharField(label='',min_length=7, max_length=7, widget=forms.TextInput(attrs=attributes))
-
+class OrderForm(forms.ModelForm):
     class Meta:
-        model = Car
-        fields = [
-            'license_plate'
-        ]
+        model = Order
+        fields = '__all__'
