@@ -1,0 +1,24 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <section class="page-content">
+        <div class="grid">
+            {% for car in cars %}
+                <div class="card">
+                    {{ car }}
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <ul>
+                {% for page in pages|get_range %}
+                    <li>
+                        <a href="{% url 'cars' page %}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+{% endblock content %}

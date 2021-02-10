@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.template.defaulttags import register
+
 
 from .models import CarWashBooth
 from .models import Car
@@ -8,6 +10,11 @@ from .models import Order
 from .models import Employee
 
 from .forms import OrderForm
+
+
+@register.filter
+def get_range(value):
+    return range(value + 1)
 
 
 # Create your views here.
@@ -31,6 +38,13 @@ def index_view(request, *args, **kwargs):
     }
 
     return render(request, 'washapp/index.html', context)
+
+def cars_view(request, page):
+    return render(request, 'washapp/cars.html', {
+        'cars': Car.objects.all()[page * 5:(5 * page) + 5],
+        'current_page': page,
+        'pages': int(Car.objects.count() / 5)
+    })
 
 
 def detail_view(request, employee_id):

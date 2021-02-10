@@ -12,6 +12,18 @@
                 </form>
             </div>
         </header>
+        <section class="page-content">
+            <header>
+                <h2></h2>
+            </header>
+            <section>
+                <ul>
+                    <li>
+                        <a href="{% url 'cars' 0 %}">Cars</a>
+                    </li>
+                </ul>
+            </section>
+        </section>
 
 
         <section class="page-content">
@@ -20,7 +32,8 @@
                     <h2>Place an Order</h2>
                 </header>
                 <section>
-                    <form class="order-form">
+                    <form class="order-form" method="post">
+                        {% csrf_token %}
                         {{ order_form }}
                         <button type="submit" class="btn">Place</button>
                     </form>
