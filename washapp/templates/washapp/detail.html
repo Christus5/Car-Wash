@@ -2,17 +2,6 @@
 
 {% block content %}
     <div>
-        <header class="page-header">
-            <div>
-
-                <h1>Employee details</h1>
-
-            </div>
-            <div>
-                <a href="{% url 'index' %}">Dashboard</a>
-            </div>
-
-        </header>
 
         <section class="page-content">
             <h2>{{ employee|capfirst }}</h2>
@@ -24,7 +13,7 @@
                         <option value="2">Week</option>
                         <option value="3">Month</option>
                     </select>
-                    <button onclick="changeOrdersView(document.getElementById('order_filter').value)">Apply</button>
+                    <button class="btn" onclick="changeOrdersView(document.getElementById('order_filter').value)">Apply</button>
                 </header>
 
                 <section>

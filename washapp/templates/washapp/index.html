@@ -2,49 +2,48 @@
 
 {% block content %}
     <div>
-        <header class="page-header">
-            <h1>Dashboard</h1>
-        </header>
-
-        <div style="margin: 0 auto; text-align: center;">
-            <form>
-                <input type="text" name="name" placeholder="Name or Lastname"/>
-                <button type="submit">Search</button>
-            </form>
-        </div>
-
 
         <section class="page-content">
             <header>
-                <h2>Employees</h2>
+                <h2></h2>
             </header>
-            <table class="table" id="employees-table">
-                <thead>
-                <tr>
-                    <th>
-                        Employee
-                    </th>
-                    <th>
-                        Details page
-                    </th>
-                </tr>
+            <section class="grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="card">
+                    <header>
+                        <h2>Total Cars: {{ car_count }}</h2>
+                    </header>
+                    <section>
+                        <a href="{% url 'cars' 0 %}">Cars</a>
+                    </section>
+                </div>
+                <div class="card">
+                    <header>
+                        <h2>Total Employees: {{ employee_count }}</h2>
+                    </header>
+                    <section>
+                        <a href="{% url 'employees' 0 %}">Employees</a>
+                    </section>
+                </div>
+            </section>
+        </section>
 
-                </thead>
-                <tbody>
-                {% for employee in employees %}
 
-                    <tr class="card">
-                        <td>
-                            {{ employee }}
-                        </td>
-                        <td>
-                            <a href="{% url 'detail' employee.pk %}">Details</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
+        <section class="page-content">
+            <div class="order-form-wrapper">
+                <header>
+                    <h2>Place an Order</h2>
+                </header>
+                <section>
+                    <form class="order-form" method="post">
+                        {% csrf_token %}
+                        {{ order_form }}
+                        <button type="submit" class="btn">Place</button>
+                    </form>
+                </section>
 
-            </table>
+            </div>
+
+
         </section>
 
     </div>

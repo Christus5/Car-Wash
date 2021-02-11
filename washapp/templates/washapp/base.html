@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="{% static 'washapp/base.css' %}"/>
 </head>
 <body>
+<nav class="nav-bar">
+    <a href="{% url 'index' %}">Dashboard</a>
+</nav>
 
-    {% block content %}
+{% block content %}
 
-    {% endblock %}
+{% endblock %}
 
 </body>
 </html>

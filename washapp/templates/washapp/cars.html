@@ -1,0 +1,31 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <section class="page-content">
+        <div class="grid">
+            {% for car in cars %}
+                <div class="card">
+                    <header>
+                        <h3>{{ car }}</h3>
+                    </header>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pages-wrapper">
+            {% if current_page == 0 %}
+                <a class="disabled"><</a>
+            {% else %}
+                <a href="{% url 'cars' current_page|add:-1 %}"><</a>
+            {% endif %}
+            {% if last_page == current_page|add:1 %}
+                <a class="disabled">></a>
+            {% else %}
+                <a href="{% url 'cars' current_page|add:1 %}">></a>
+
+            {% endif %}
+
+        </div>
+    </section>
+
+{% endblock content %}

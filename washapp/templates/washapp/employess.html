@@ -1,0 +1,33 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <section class="page-content">
+        <header>
+            <h2>Employees</h2>
+            <div class="search-bar">
+                <form>
+                    <input type="text" name="name" placeholder="Name or Lastname"/>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+        </header>
+        {% include 'washapp/employees_list/gird_view.html' %}
+
+        <div class="pages-wrapper">
+            {% if current_page == 0 %}
+                <a class="disabled"><</a>
+            {% else %}
+                <a href="{% url 'employees' current_page|add:-1 %}"><</a>
+            {% endif %}
+            {% if last_page == current_page|add:1 %}
+                <a class="disabled">></a>
+            {% else %}
+                <a href="{% url 'employees' current_page|add:1 %}">></a>
+
+            {% endif %}
+        </div>
+    </section>
+
+
+{% endblock %}
