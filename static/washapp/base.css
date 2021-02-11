@@ -10,6 +10,7 @@
     --graphite: #242428;
     --lime: #69ff2f;
     --yellow: #fff52a;
+    --green: #3d913d;
 }
 
 body {
@@ -208,5 +209,27 @@ a:hover {
 }
 
 .card {
-    width: 100%;
+    width: 85%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background: var(--green);
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 25px;
+    box-shadow: 0 0 15px -5px black;
+    color: white;
+}
+
+.card > header {
+    border: inherit;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: inherit;
+    text-align: center;
+    background: var(--lime);
+}
+
+.card > section {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 20px;
 }

@@ -34,7 +34,9 @@ def index_view(request, *args, **kwargs):
 
     context = {
         'employees': Employee.objects.filter(employee_q),
-        'order_form': orderForm
+        'order_form': orderForm,
+        'car_count': Car.objects.count(),
+        'employee_count': Employee.objects.count()
     }
 
     return render(request, 'washapp/index.html', context)

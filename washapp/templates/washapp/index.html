@@ -16,12 +16,23 @@
             <header>
                 <h2></h2>
             </header>
-            <section>
-                <ul>
-                    <li>
+            <section class="grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="card">
+                    <header>
+                        <h2>Total Cars: {{ car_count }}</h2>
+                    </header>
+                    <section>
                         <a href="{% url 'cars' 0 %}">Cars</a>
-                    </li>
-                </ul>
+                    </section>
+                </div>
+                <div class="card">
+                    <header>
+                        <h2>Total Employees: {{ employee_count }}</h2>
+                    </header>
+                    <section>
+{#                        <a href="{% url 'employees' 0 %}">Employees</a>#}
+                    </section>
+                </div>
             </section>
         </section>
 
