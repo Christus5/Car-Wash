@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.template.defaulttags import register
 
 from .models import CarWashBooth
@@ -42,7 +42,7 @@ def cars_view(request, page):
         last_page = cars.count() / 6 if cars.count() % 6 == 0 else int((cars.count() / 6) + 1)
 
     if (page + 1) > last_page:
-        return Http404
+        return HttpResponseNotFound()
 
 
     return render(request, 'washapp/cars.html', {
@@ -64,7 +64,7 @@ def employees_view(request, page):
         last_page = employees.count() / 6 if employees.count() % 6 == 0 else (employees.count() / 6) + 1
 
     if (page + 1) > last_page:
-        return Http404
+        return HttpResponseNotFound()
 
     return render(request, 'washapp/employess.html', {
         'employees': employees[page * 6:(page * 6) + 6],
