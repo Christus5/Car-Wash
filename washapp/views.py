@@ -37,9 +37,9 @@ def index_view(request, *args, **kwargs):
 
 def cars_view(request, page):
     cars = Car.objects.all()
-
-
-    last_page = cars.count() / 6 if cars.count() % 6 == 0 else int((cars.count() / 6) + 1)
+    last_page = 1
+    if cars.count() > 6:
+        last_page = cars.count() / 6 if cars.count() % 6 == 0 else int((cars.count() / 6) + 1)
 
     if (page + 1) > last_page:
         return Http404
@@ -59,8 +59,9 @@ def employees_view(request, page):
     if search:
         employee_q &= Q(name__icontains=search) | Q(last_name__icontains=search)
     employees = Employee.objects.filter(employee_q)
-    last_page = employees.count() / 6 if employees.count() % 6 == 0 else (employees.count() / 6) + 1
-    print(last_page)
+    last_page = 1
+    if employees.count() > 6:
+        last_page = employees.count() / 6 if employees.count() % 6 == 0 else (employees.count() / 6) + 1
 
     if (page + 1) > last_page:
         return Http404
