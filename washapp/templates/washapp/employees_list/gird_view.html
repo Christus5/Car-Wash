@@ -2,10 +2,10 @@
     {% for employee in employees %}
         <div class="card">
             <header>
-                <h3>{{ employee.name }}</h3>
                 <h3>{{ employee }}</h3>
             </header>
             <section>
+                <p><span style="color: var(--graphite)">Share:</span> {{ employee.share }}%</p>
                 <a href="{% url 'detail' employee.id %}">Details</a>
             </section>
         </div>
