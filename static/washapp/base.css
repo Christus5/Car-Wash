@@ -250,3 +250,31 @@ a:hover {
     text-align: center;
     padding: 20px;
 }
+
+.pages-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 25px auto;
+}
+
+.pages-wrapper a {
+    color: black;
+    display: inline-block;
+    background: white;
+    padding: 5px;
+    border: 1px solid var(--gray-blue-dark);
+    text-decoration: none;
+    transition: 0.3s ease-out;
+}
+
+.disabled {
+    background: var(--gray-blue);
+    cursor: not-allowed;
+}
+
+
+.pages-wrapper a:hover {
+    background: var(--gray-blue);
+    color: white;
+}

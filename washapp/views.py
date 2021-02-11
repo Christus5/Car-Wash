@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.template.defaulttags import register
 
 from .models import CarWashBooth
@@ -36,10 +36,20 @@ def index_view(request, *args, **kwargs):
 
 
 def cars_view(request, page):
+    cars = Car.objects.all()
+
+
+    last_page = cars.count() / 6 if cars.count() % 6 == 0 else int((cars.count() / 6) + 1)
+
+    if (page + 1) > last_page:
+        return Http404
+
+
     return render(request, 'washapp/cars.html', {
-        'cars': Car.objects.all()[page * 5:(5 * page) + 5],
+        'cars': cars[page * 6:(6 * page) + 6],
         'current_page': page,
-        'pages': int(Car.objects.count() / 5)
+        'pages': int(Car.objects.count() / 5),
+        'last_page': last_page
     })
 
 
@@ -48,10 +58,17 @@ def employees_view(request, page):
     employee_q = Q()
     if search:
         employee_q &= Q(name__icontains=search) | Q(last_name__icontains=search)
+    employees = Employee.objects.filter(employee_q)
+    last_page = employees.count() / 6 if employees.count() % 6 == 0 else (employees.count() / 6) + 1
+    print(last_page)
+
+    if (page + 1) > last_page:
+        return Http404
 
     return render(request, 'washapp/employess.html', {
-        'employees': Employee.objects.filter(employee_q)[page * 5:(page * 5) + 5],
-        'current_page': page
+        'employees': employees[page * 6:(page * 6) + 6],
+        'current_page': page,
+        'last_page': last_page
     })
 
 

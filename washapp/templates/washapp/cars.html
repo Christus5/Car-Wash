@@ -6,18 +6,25 @@
         <div class="grid">
             {% for car in cars %}
                 <div class="card">
-                    {{ car }}
+                    <header>
+                        <h3>{{ car }}</h3>
+                    </header>
                 </div>
             {% endfor %}
         </div>
-        <div>
-            <ul>
-                {% for page in pages|get_range %}
-                    <li>
-                        <a href="{% url 'cars' page %}">{{ page }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+        <div class="pages-wrapper">
+            {% if current_page == 0 %}
+                <a class="disabled"><</a>
+            {% else %}
+                <a href="{% url 'cars' current_page|add:-1 %}"><</a>
+            {% endif %}
+            {% if last_page == current_page|add:1 %}
+                <a class="disabled">></a>
+            {% else %}
+                <a href="{% url 'cars' current_page|add:1 %}">></a>
+
+            {% endif %}
+
         </div>
     </section>
 
