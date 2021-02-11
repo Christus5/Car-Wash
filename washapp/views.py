@@ -1,11 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseNotFound
 from django.template.defaulttags import register
 
-from .models import CarWashBooth
 from .models import Car
-from .models import Order
 from .models import Employee
 
 from .forms import OrderForm

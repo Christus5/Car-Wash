@@ -1,9 +1,6 @@
 from django.contrib import admin
 
-from .models import Employee
-from .models import Car
-from .models import CarWashBooth
-from .models import Order
+from .models import *
 
 @admin.register(Employee)
 class EmployeeAdminModel(admin.ModelAdmin):
