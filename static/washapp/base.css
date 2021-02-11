@@ -210,9 +210,11 @@ a:hover {
 
 }
 
+/* order form */
+
 .order-form-wrapper {
     text-align: center;
-    margin: 0 auto;
+    margin: 50px auto;
     width: 35%;
     background: white;
     box-sizing: border-box;
@@ -224,14 +226,26 @@ a:hover {
 .order-form {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
 }
 
 .order-form > *:not(label) {
     padding: 0.4em 0;
-    margin: 5px 0;
+    margin: 5px auto;
+    width: 70%;
+    box-sizing: border-box;
+    transition: 0.3s ease-out;
+    outline: none;
 }
 
+.order-form >*:not(label):focus{
+    width: 99%;
+    border: 1px solid var(--lime);
+    box-shadow: 0 0 20px -5px var(--lime);
+}
+
+
+/* end order form */
 /* grid */
 
 .grid {
