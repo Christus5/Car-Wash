@@ -1,8 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 :root {
     --gray-blue: #919cb0;
     --gray-blue-dark: #4f4f7e;
@@ -13,11 +8,30 @@
     --green: #3d913d;
 }
 
+/* defaults */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, "Roboto", "Lucida Grande", Verdana, sans-serif;
     font-weight: 700;
     background: rgba(0, 0, 255, 0.7);
 }
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.3em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* end defaults */
 
 .nav-bar {
     margin: 25px;
@@ -26,6 +40,8 @@ body {
     display: flex;
     background: var(--graphite);
 }
+
+/* button */
 
 .btn {
     padding: 0.5em;
@@ -50,15 +66,8 @@ body {
     transform: scale(0.7);
 }
 
-a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.3em;
-}
-
-a:hover {
-    text-decoration: underline;
-}
+/* buttons */
+/* table */
 
 .table {
     border-collapse: collapse;
@@ -84,17 +93,8 @@ a:hover {
     padding: 15px;
 }
 
-.page-header {
-    box-sizing: border-box;
-    margin: 5vh auto;
-    padding: 5px 25px;
-    width: 95%;
-    display: flex;
-    background: var(--graphite);
-    justify-content: space-between;
-    color: white;
-    box-shadow: 0 0 20px -5px black;
-}
+/* end table */
+/* search bar */
 
 .search-bar {
     display: flex;
@@ -106,7 +106,6 @@ a:hover {
 .search-bar > form {
     margin: 0 auto;
     box-sizing: border-box;
-
 }
 
 .search-bar button {
@@ -125,7 +124,20 @@ a:hover {
     border: 0;
     box-shadow: 0 0 10px -5px var(--lime);
     font-weight: 700;
+}
 
+/* end search bar */
+
+.page-header {
+    box-sizing: border-box;
+    margin: 5vh auto;
+    padding: 5px 25px;
+    width: 95%;
+    display: flex;
+    background: var(--graphite);
+    justify-content: space-between;
+    color: white;
+    box-shadow: 0 0 20px -5px black;
 }
 
 .page-header a {
@@ -147,6 +159,7 @@ a:hover {
     margin: 15px 0;
 }
 
+/* orders */
 
 .orders {
     width: 100%;
@@ -169,6 +182,8 @@ a:hover {
     width: 70%;
     margin: 0 auto;
 }
+
+/* end orders */
 
 #employees-table {
     width: 90%;
@@ -217,6 +232,8 @@ a:hover {
     margin: 5px 0;
 }
 
+/* grid */
+
 .grid {
     display: grid;
     width: 100%;
@@ -251,6 +268,9 @@ a:hover {
     padding: 20px;
 }
 
+/* end grid */
+
+/* page switcher */
 .pages-wrapper {
     display: flex;
     flex-direction: row;
@@ -278,3 +298,5 @@ a:hover {
     background: var(--gray-blue);
     color: white;
 }
+
+/* end page switcher */
