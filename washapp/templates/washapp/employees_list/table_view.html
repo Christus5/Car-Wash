@@ -1,0 +1,39 @@
+<table class="table" id="employees-table">
+            <thead>
+            <tr>
+                <th>
+                    Employee
+                </th>
+                <th style="float: right">
+                    <div class="search-bar">
+                        <form>
+                            <input type="text" name="name" placeholder="Name or Lastname"/>
+                            <button type="submit" class="btn">Search</button>
+                        </form>
+                    </div>
+                </th>
+            </tr>
+
+            </thead>
+            <tbody>
+            {% if not employees %}
+                <td style="width: 100%;">
+                    <h3 style="text-align: center">No Data</h3>
+                </td>
+            {% endif %}
+
+            {% for employee in employees %}
+
+                <tr>
+                    <td>
+                        {{ employee }}
+                    </td>
+                    <td style="float: right;">
+                        <a href="{% url 'detail' employee.pk %}" style="color: white;" class="btn">Details</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+
+        </table>

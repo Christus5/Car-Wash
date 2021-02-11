@@ -2,16 +2,7 @@
 
 {% block content %}
     <div>
-        <header class="page-header">
-            <h1>Dashboard</h1>
 
-            <div class="search-bar">
-                <form>
-                    <input type="text" name="name" placeholder="Name or Lastname"/>
-                    <button type="submit" class="btn">Search</button>
-                </form>
-            </div>
-        </header>
         <section class="page-content">
             <header>
                 <h2></h2>
@@ -30,7 +21,7 @@
                         <h2>Total Employees: {{ employee_count }}</h2>
                     </header>
                     <section>
-{#                        <a href="{% url 'employees' 0 %}">Employees</a>#}
+                        <a href="{% url 'employees' 0 %}">Employees</a>
                     </section>
                 </div>
             </section>
@@ -49,44 +40,6 @@
                         <button type="submit" class="btn">Place</button>
                     </form>
                 </section>
-
-            </div>
-            <div>
-                <header>
-                    <h2>Employees</h2>
-                </header>
-                <table class="table" id="employees-table">
-                    <thead>
-                    <tr>
-                        <th>
-                            Employee
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    </thead>
-                    <tbody>
-                    {% if not employees %}
-                        <td style="width: 100%;">
-                            <h3 style="text-align: center">No Data</h3>
-                        </td>
-                    {% endif %}
-
-                    {% for employee in employees %}
-
-                        <tr class="card">
-                            <td>
-                                {{ employee }}
-                            </td>
-                            <td>
-                                <a href="{% url 'detail' employee.pk %}" style="color: white;" class="btn">Details</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-
-
-                </table>
 
             </div>
 

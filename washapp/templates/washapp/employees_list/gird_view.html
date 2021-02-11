@@ -1,0 +1,14 @@
+<div class="grid" style="margin-top: 25px">
+    {% for employee in employees %}
+        <div class="card">
+            <header>
+                <h3>{{ employee.name }}</h3>
+                <h3>{{ employee }}</h3>
+            </header>
+            <section>
+                <a href="{% url 'detail' employee.id %}">Details</a>
+            </section>
+        </div>
+
+    {% endfor %}
+</div>

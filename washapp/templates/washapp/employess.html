@@ -1,0 +1,21 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <section class="page-content">
+        <header>
+            <h2>Employees</h2>
+            <div class="search-bar">
+                <form>
+                    <input type="text" name="name" placeholder="Name or Lastname"/>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+        </header>
+
+
+        {% include 'washapp/employees_list/gird_view.html' %}
+    </section>
+
+
+{% endblock %}
