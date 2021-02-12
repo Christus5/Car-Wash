@@ -5,10 +5,10 @@ from .models import *
 
 class OrderForm(forms.ModelForm):
     requested = forms.DateTimeField(widget=forms.DateInput(attrs={
-        'type': 'date'
+        'type': 'datetime-local'
     }))
     completed = forms.DateTimeField(widget=forms.DateInput(attrs={
-        'type': 'date'
+        'type': 'datetime-local'
     }))
 
     car = forms.ModelChoiceField(empty_label='Select Car', queryset=Car.objects.all())
