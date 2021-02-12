@@ -276,6 +276,13 @@ a:hover {
     background: var(--lime);
 }
 
+.card .image {
+    border-radius: 50%;
+    width: 50px;
+    box-shadow: 0 0 20px -5px var(--graphite);
+    background: white;
+}
+
 .card > section {
     box-sizing: border-box;
     text-align: center;
