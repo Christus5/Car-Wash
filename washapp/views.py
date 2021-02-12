@@ -73,6 +73,6 @@ def employees_view(request, page):
 
 def detail_view(request, employee_id):
     employee = get_object_or_404(Employee, pk=employee_id)
-    return render(request, 'washapp/detail.html', {
+    return render(request, 'washapp/employee_detail.html', {
         'employee': employee
     })
