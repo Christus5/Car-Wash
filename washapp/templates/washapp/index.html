@@ -8,15 +8,15 @@
                 <h2></h2>
             </header>
             <section class="grid" style="grid-template-columns: 1fr 1fr;">
-                <div class="card">
+                <div class="card large">
                     <header>
                         <h2>Total Cars: {{ car_count }}</h2>
                     </header>
                     <section>
-                        <a href="{% url 'washapp:cars' 0 %}">Cars</a>
+                        <a href="{% url 'washapp:cars' %}?page=1">Cars</a>
                     </section>
                 </div>
-                <div class="card">
+                <div class="card large">
                     <header>
                         <h2>Total Employees: {{ employee_count }}</h2>
                     </header>
@@ -29,9 +29,18 @@
 
 
         <section class="page-content">
-            <div class="order-form-wrapper">
+            <div class="center" style="margin-top: 150px;">
+                <button class="btn btn-large" onclick="showOrder()" id="show-order-button">Order</button>
+            </div>
+
+            <div class="order-form-wrapper hide" id="order_form_1">
+                <button onclick="hideOrder()"
+                        class="btn btn-warning"
+                        style="position: relative; top: 0; left: 50%;">&#10006;
+                </button>
                 <header>
                     <h2>Place an Order</h2>
+
                 </header>
                 <section>
                     <form class="order-form" method="post">
@@ -47,4 +56,15 @@
         </section>
 
     </div>
+    <script>
+        function showOrder() {
+            document.getElementById('order_form_1').classList.remove('hide');
+            document.getElementById('show-order-button').classList.add('hide');
+        }
+
+        function hideOrder() {
+            document.getElementById('order_form_1').classList.add('hide');
+            document.getElementById('show-order-button').classList.remove('hide');
+        }
+    </script>
 {% endblock %}

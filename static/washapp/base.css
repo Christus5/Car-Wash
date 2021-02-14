@@ -6,6 +6,7 @@
     --lime: #69ff2f;
     --yellow: #fff52a;
     --green: #3d913d;
+    --red: #ff2c2c;
 }
 
 /* defaults */
@@ -34,7 +35,8 @@ a:hover {
 /* end defaults */
 
 .nav-bar {
-    margin: 25px;
+    width: 95%;
+    margin: 25px auto;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
@@ -50,7 +52,7 @@ a:hover {
     cursor: pointer;
     border: 1px solid var(--graphite);
     box-shadow: 0 0 20px -5px black;
-    border-radius: 5px;
+    border-radius: 2px;
     outline: none;
 }
 
@@ -64,6 +66,15 @@ a:hover {
 
 .btn:active {
     transform: scale(0.9);
+}
+
+.btn-large {
+    width: 350px;
+    padding: 1.2em;
+}
+
+.btn-warning {
+    background-color: var(--red);
 }
 
 /* buttons */
@@ -142,8 +153,7 @@ a:hover {
 
 .page-header a {
     display: block;
-    margin: auto;
-    margin-top: 10px;
+    margin: 10px auto auto;
 }
 
 .page-content {
@@ -169,8 +179,7 @@ a:hover {
 .orders > header {
     display: flex;
     width: 70%;
-    margin: 0 auto;
-    margin-bottom: 5px;
+    margin: 0 auto 5px;
 }
 
 #order_filter {
@@ -214,13 +223,12 @@ a:hover {
 
 .order-form-wrapper {
     text-align: center;
-    margin: 50px auto;
     width: 35%;
     background: white;
     box-sizing: border-box;
     padding: 35px;
     box-shadow: 0 0 20px -5px var(--graphite);
-    margin-bottom: 35px;
+    margin: 50px auto 35px;
 }
 
 .order-form {
@@ -265,6 +273,10 @@ a:hover {
     border-top-left-radius: 25px;
     box-shadow: 0 0 15px -5px black;
     color: white;
+}
+
+.large {
+    width: 90%;
 }
 
 .card > header {
@@ -325,3 +337,12 @@ a.disabled {
 }
 
 /* end page switcher */
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}

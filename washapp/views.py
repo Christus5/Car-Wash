@@ -34,20 +34,20 @@ def index_view(request, *args, **kwargs):
     return render(request, 'washapp/index.html', context)
 
 
-def cars_view(request, page):
-    cars = Car.objects.all()
-    last_page = 1
-    if cars.count() > 6:
-        last_page = cars.count() / 6 if cars.count() % 6 == 0 else int((cars.count() / 6) + 1)
+def cars_view(request, *args, **kwargs):
+    cars_list = Car.objects.all()
 
-    if (page + 1) > last_page:
-        return HttpResponseNotFound()
+    paginator = Paginator(cars_list, 3)
+    page = request.GET.get('page')
+
+    try:
+        cars = paginator.page(page)
+    except:
+        HttpResponseRedirect('?page=1')
 
     return render(request, 'washapp/cars.html', {
-        'cars': cars[page * 6:(6 * page) + 6],
-        'current_page': page,
-        'pages': int(Car.objects.count() / 5),
-        'last_page': last_page
+        'cars': cars,
+        'page': paginator.page(page)
     })
 
 
@@ -58,13 +58,13 @@ def employees_view(request, *args, **kwargs):
         employee_q &= Q(name__icontains=search) | Q(last_name__icontains=search)
     employees_list = Employee.objects.filter(employee_q)
 
-    paginator = Paginator(employees_list, 1)
+    paginator = Paginator(employees_list, 3)
     page = request.GET.get('page')
 
     try:
         employees = paginator.page(page)
     except:
-        return HttpResponseRedirect('?page=1')
+        return HttpResponseRedirect(f'?page=1&name={search}')
 
     return render(request, 'washapp/employess.html', {
         'employees': employees,
