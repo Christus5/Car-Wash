@@ -13,7 +13,7 @@
                         <h2>Total Cars: {{ car_count }}</h2>
                     </header>
                     <section>
-                        <a href="{% url 'cars' 0 %}">Cars</a>
+                        <a href="{% url 'washapp:cars' 0 %}">Cars</a>
                     </section>
                 </div>
                 <div class="card">
@@ -21,7 +21,7 @@
                         <h2>Total Employees: {{ employee_count }}</h2>
                     </header>
                     <section>
-                        <a href="{% url 'employees' 0 %}">Employees</a>
+                        <a href="{% url 'washapp:employees' %}?page=1">Employees</a>
                     </section>
                 </div>
             </section>

@@ -1,7 +1,8 @@
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseNotFound
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.template.defaulttags import register
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Car
 from .models import Employee
@@ -42,7 +43,6 @@ def cars_view(request, page):
     if (page + 1) > last_page:
         return HttpResponseNotFound()
 
-
     return render(request, 'washapp/cars.html', {
         'cars': cars[page * 6:(6 * page) + 6],
         'current_page': page,
@@ -51,23 +51,24 @@ def cars_view(request, page):
     })
 
 
-def employees_view(request, page):
+def employees_view(request, *args, **kwargs):
     search = request.GET.get('name')
     employee_q = Q()
     if search:
         employee_q &= Q(name__icontains=search) | Q(last_name__icontains=search)
-    employees = Employee.objects.filter(employee_q)
-    last_page = 1
-    if employees.count() > 6:
-        last_page = employees.count() / 6 if employees.count() % 6 == 0 else (employees.count() / 6) + 1
+    employees_list = Employee.objects.filter(employee_q)
 
-    if (page + 1) > last_page:
-        return HttpResponseNotFound()
+    paginator = Paginator(employees_list, 1)
+    page = request.GET.get('page')
+
+    try:
+        employees = paginator.page(page)
+    except:
+        return HttpResponseRedirect('?page=1')
 
     return render(request, 'washapp/employess.html', {
-        'employees': employees[page * 6:(page * 6) + 6],
-        'current_page': page,
-        'last_page': last_page
+        'employees': employees,
+        'page': paginator.page(page),
     })
 
 

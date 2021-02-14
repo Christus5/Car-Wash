@@ -1,0 +1,17 @@
+<div class="pages-wrapper">
+    {% if page.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ page.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% for num in page.paginator.page_range %}
+        {% if page.number == num %}
+            <a class="disabled">{{ num }}</a>
+        {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page.has_next %}
+        <a href="{% url 'washapp:employees' %}?page={{ page.next_page_number }}">Next</a>
+        <a href="?page={{ page.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>

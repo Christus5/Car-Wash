@@ -49,7 +49,6 @@ a:hover {
     color: white;
     cursor: pointer;
     border: 1px solid var(--graphite);
-    transition: 0.3s ease-out;
     box-shadow: 0 0 20px -5px black;
     border-radius: 5px;
     outline: none;
@@ -60,10 +59,11 @@ a:hover {
     box-shadow: 0 0 20px -5px var(--lime);
     background-color: var(--blue);
     color: white;
+    transition: 0.3s ease-out;
 }
 
 .btn:active {
-    transform: scale(0.7);
+    transform: scale(0.9);
 }
 
 /* buttons */
@@ -238,7 +238,7 @@ a:hover {
     outline: none;
 }
 
-.order-form >*:not(label):focus{
+.order-form > *:not(label):focus {
     width: 99%;
     border: 1px solid var(--lime);
     box-shadow: 0 0 20px -5px var(--lime);
@@ -300,24 +300,28 @@ a:hover {
 }
 
 .pages-wrapper a {
-    color: black;
+    color: var(--green);
     display: inline-block;
     background: white;
     padding: 5px;
-    border: 1px solid var(--gray-blue-dark);
+    margin: 0 1px;
+    border: 1px solid var(--green);
+    border-radius: 5px;
+    box-shadow: 0 0 10px -5px black;
     text-decoration: none;
-    transition: 0.3s ease-out;
 }
 
-.disabled {
-    background: var(--gray-blue);
+a.disabled {
+    background-color: var(--blue);
+    color: white;
     cursor: not-allowed;
 }
 
 
 .pages-wrapper a:hover {
-    background: var(--gray-blue);
+    background: var(--blue);
     color: white;
+    transition: 0.3s ease-out;
 }
 
 /* end page switcher */
