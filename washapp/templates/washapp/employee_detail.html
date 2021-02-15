@@ -1,31 +1,63 @@
 {% extends 'washapp/base.html' %}
 
 {% block content %}
-    <div>
-
-        <section class="page-content">
-            <h2>{{ employee|capfirst }}</h2>
-            <div class="orders">
-                <header>
-                    <select name='order_filter' id="order_filter">
-                        <option selected value="0">All</option>
-                        <option value="1">Day</option>
-                        <option value="2">Week</option>
-                        <option value="3">Month</option>
+    <a href="{% url 'washapp:employees' %}" class="btn fixed-top">&#10094;</a>
+    <section class="page-content">
+        <div class="avatar-wrapper">
+            <img src="{{ employee.avatar.url }}" alt="employee_avatar" class="employee-detail-avatar"/>
+        </div>
+        <h2>{{ employee|capfirst }}</h2>
+        <div class="orders">
+            <header>
+                <form>
+                    <select name='orders_by' id="order_filter">
+                        <option selected value="all">All</option>
+                        {% if request.GET.orders_by %}
+                            <option selected value="{{ request.GET.orders_by }}"
+                                    hidden>{{ request.GET.orders_by|capfirst }}</option>
+                        {% endif %}
+                        <option value="day">Day</option>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
                     </select>
-                    <button class="btn" onclick="changeOrdersView(document.getElementById('order_filter').value)">Apply</button>
-                </header>
+                    <button class="btn" type="submit">
+                        Apply
+                    </button>
+                </form>
 
-                <section>
-                    {% include 'washapp/detailsPage/orders.html' %}
-                </section>
+            </header>
 
-            </div>
-        </section>
+            <section>
+                {% include 'washapp/detailsPage/orders.html' %}
+                <div class="pages-wrapper">
+                    <div class="pages-wrapper">
+                        {% if page.has_previous %}
+                            <a href="?page=1
+            {% if request.GET.orders_by %}&orders_by={{ request.GET.orders_by }}{% endif %}">First</a>
+                            <a href="?page={{ page.previous_page_number }}
+            {% if request.GET.orders_by %}&orders_by={{ request.GET.orders_by }}{% endif %}">Previous</a>
+                        {% endif %}
+                        {% for num in page.paginator.page_range %}
+                            {% if page.number == num %}
+                                <a class="disabled">{{ num }}</a>
+                            {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+                                <a href="?page={{ num }}
+            {% if request.GET.orders_by %}&orders_by={{ request.GET.orders_by }}{% endif %}">{{ num }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <a href="?page={{ page.next_page_number }}
+            {% if request.GET.orders_by %}&orders_by={{ request.GET.orders_by }}{% endif %}">Next</a>
+                            <a href="?page={{ page.paginator.num_pages }}
+            {% if request.GET.orders_by %}&orders_by={{ request.GET.orders_by }}{% endif %}">Last</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
 
+        </div>
+    </section>
 
-
-    </div>
     <script>
         const defaultView = document.getElementById('orders_default_id');
         const dayView = document.getElementById('orders_day_id');

@@ -1,15 +1,12 @@
-import datetime
-
 from django.db import models
 from django.utils import timezone
-
 
 
 # Create your models here.
 class Employee(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    avatar = models.ImageField(default='washapp/no_image.svg' ,upload_to='washapp/employees/')
+    avatar = models.ImageField(default='washapp/no_image.svg', upload_to='washapp/employees/')
     share = models.PositiveSmallIntegerField(default=45)
 
     created = models.DateTimeField(auto_now_add=True, verbose_name='Hired')

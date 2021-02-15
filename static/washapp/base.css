@@ -77,6 +77,15 @@ a:hover {
     background-color: var(--red);
 }
 
+a.btn {
+    text-decoration: none;
+    opacity: 30%;
+}
+
+a.btn:hover {
+    opacity: 1;
+}
+
 /* buttons */
 /* table */
 
@@ -176,7 +185,7 @@ a:hover {
     margin: 0 auto;
 }
 
-.orders > header {
+.orders > header > form {
     display: flex;
     width: 70%;
     margin: 0 auto 5px;
@@ -345,4 +354,21 @@ a.disabled {
 
 .hide {
     display: none;
+}
+
+.employee-detail-avatar {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.avatar-wrapper {
+    margin: 0 auto;
+    width: 70%;
+    text-align: left;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 50%;
+    left: 2.5%;
 }

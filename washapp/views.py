@@ -1,8 +1,9 @@
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.template.defaulttags import register
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
+from django.utils import timezone
 
 from .models import Car
 from .models import Employee
@@ -17,16 +18,16 @@ def get_range(value):
 
 # Create your views here.
 def index_view(request, *args, **kwargs):
-    orderForm = OrderForm()
+    order_form = OrderForm()
 
     if request.POST:
-        orderForm = OrderForm(request.POST)
+        order_form = OrderForm(request.POST)
 
-        if orderForm.is_valid():
-            orderForm.save()
+        if order_form.is_valid():
+            order_form.save()
 
     context = {
-        'order_form': orderForm,
+        'order_form': order_form,
         'car_count': Car.objects.count(),
         'employee_count': Employee.objects.count()
     }
@@ -39,6 +40,7 @@ def cars_view(request, *args, **kwargs):
 
     paginator = Paginator(cars_list, 3)
     page = request.GET.get('page')
+    cars = []
 
     try:
         cars = paginator.page(page)
@@ -64,16 +66,39 @@ def employees_view(request, *args, **kwargs):
     try:
         employees = paginator.page(page)
     except:
-        return HttpResponseRedirect(f'?page=1&name={search}')
+        return HttpResponseRedirect(f'?page=1&name={search}' if search else '?page=1')
 
-    return render(request, 'washapp/employess.html', {
+    return render(request, 'washapp/employees.html', {
         'employees': employees,
         'page': paginator.page(page),
     })
 
 
-def detail_view(request, employee_id):
-    employee = get_object_or_404(Employee, pk=employee_id)
+def detail_view(request, *args, **kwargs):
+    employee = get_object_or_404(Employee, pk=kwargs['employee_id'])
+
+
+    orders_by = request.GET.get('orders_by')
+    orders = employee.order_set.all()
+    if orders_by == 'day':
+        orders = [order for order in orders if order.completed >= timezone.now() - timezone.timedelta(days=1)]
+    elif orders_by == 'week':
+        orders = [order for order in orders if order.completed >= timezone.now() - timezone.timedelta(weeks=1)]
+    elif orders_by == 'month':
+        orders = [order for order in orders if order.completed >= timezone.now() - timezone.timedelta(weeks=4)]
+
+    paginator = Paginator(orders, 5)
+    page = request.GET.get('page')
+
+    try:
+        orders = paginator.page(page)
+    except:
+        return HttpResponseRedirect(f'?page=1&orders_by={orders_by}' if orders_by else '?page=1')
+
+
+
     return render(request, 'washapp/employee_detail.html', {
-        'employee': employee
+        'employee': employee,
+        'orders': orders,
+        'page': paginator.page(page)
     })
