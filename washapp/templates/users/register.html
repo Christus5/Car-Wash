@@ -1,13 +1,20 @@
 {% extends 'washapp/base.html' %}
 
 {% block content %}
-
-    <form>
-        {{ register_form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
-    <div>
-        Already Registered? <a href="{% url 'washapp:login' %}">Sign In</a>
+    <div class="login-form-wrapper">
+        <form class="login-form" method="post">
+            {% csrf_token %}
+            {% for field in register_form %}
+                <div class="input-wrapper">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <div>
+            Already Registered? <a href="{% url 'washapp:login' %}">Sign In</a>
+        </div>
     </div>
 
 {% endblock %}

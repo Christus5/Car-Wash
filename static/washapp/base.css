@@ -43,6 +43,17 @@ a:hover {
     background: var(--graphite);
 }
 
+.page-links {
+    flex: 8;
+}
+
+.login-links {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /* button */
 
 .btn {
@@ -371,4 +382,32 @@ a.disabled {
     position: fixed;
     top: 50%;
     left: 2.5%;
+}
+
+.input-wrapper {
+    text-align: left;
+    max-width: 100%;
+}
+
+.input-wrapper > label {
+    display: block;
+}
+
+.input-wrapper > input {
+    box-sizing: border-box;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.login-form {
+    margin: 0 auto;
+    padding: 25px;
+    box-sizing: border-box;
+    width: 350px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.login-form-wrapper {
+    text-align: center;
 }
