@@ -13,7 +13,8 @@ class OrderForm(forms.ModelForm):
 
     car = forms.ModelChoiceField(empty_label='Select Car', queryset=Car.objects.all())
     wash_booth = forms.ModelChoiceField(empty_label='Select Booth', queryset=CarWashBooth.objects.all())
-    washer = forms.ModelChoiceField(empty_label='Select Washer', queryset=Employee.objects.all())
+    washer = forms.ModelChoiceField(empty_label='Select Washer',
+                                    queryset=Account.objects.filter(is_staff=True, is_admin=False))
     price = forms.DecimalField(min_value=0)
 
     class Meta:

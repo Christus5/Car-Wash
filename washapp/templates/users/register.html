@@ -1,0 +1,13 @@
+{% extends 'washapp/base.html' %}
+
+{% block content %}
+
+    <form>
+        {{ register_form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+    <div>
+        Already Registered? <a href="{% url 'washapp:login' %}">Sign In</a>
+    </div>
+
+{% endblock %}
