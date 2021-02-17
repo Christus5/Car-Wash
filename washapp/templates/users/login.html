@@ -1,4 +1,4 @@
-{% extends 'washapp/base.html' %}
+{% extends 'base/base.html' %}
 
 {% block content %}
 
@@ -20,8 +20,13 @@
             <div class="error-messages">
                 {{ login_form.errors }}
             </div>
-            <div>
-                Join Us Today <a href="{% url 'washapp:register' %}">Sign Up</a>
+            <div class="login-links login-links-wrapper">
+                <p>
+                    Join Us Today <a href="{% url 'washapp:register' %}">Sign Up</a>
+                </p>
+                <p>
+                    Forgot password? <a href="{% url 'reset_password' %}">Reset</a>
+                </p>
             </div>
         </div>
 

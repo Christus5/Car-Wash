@@ -401,13 +401,20 @@ a.disabled {
 }
 
 .login-form {
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
     padding: 25px;
     box-sizing: border-box;
     width: 350px;
     background: rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 20px -5px black;
     border-radius: 2px;
+}
+
+.login-form > form {
+    margin-top: 40%;
 }
 
 .login-form-wrapper {
@@ -421,4 +428,9 @@ a.disabled {
 
 .error-messages > ul > li {
     margin: 10px 0;
+}
+
+.login-links-wrapper {
+    position: relative;
+    bottom: -30%;
 }
