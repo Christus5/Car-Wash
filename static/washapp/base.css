@@ -434,3 +434,8 @@ a.disabled {
     position: relative;
     bottom: -30%;
 }
+
+.avatar {
+    width: 20px;
+    border-radius: 50%;
+}
