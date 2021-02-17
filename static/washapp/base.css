@@ -406,8 +406,19 @@ a.disabled {
     box-sizing: border-box;
     width: 350px;
     background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px -5px black;
+    border-radius: 2px;
 }
 
 .login-form-wrapper {
     text-align: center;
+}
+
+.error-messages {
+    color: var(--red);
+    text-align: left;
+}
+
+.error-messages > ul > li {
+    margin: 10px 0;
 }

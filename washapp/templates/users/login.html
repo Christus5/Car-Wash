@@ -2,9 +2,30 @@
 
 {% block content %}
 
-    <form>
-    {{ login_form }}
-    <button type="submit" class="btn">Sign In</button>
-    </form>
+    <div class="login-form-wrapper">
+        <div class="login-form">
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-wrapper">
+                    <label for="id_username_login">Username</label>
+                    <input id="id_username_login" name="username" type="text"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="id_password">Password</label>
+                    <input id="id_password" name="password" type="password"/>
+                </div>
+
+                <button type="submit" class="btn">Sign In</button>
+            </form>
+            <div class="error-messages">
+                {{ login_form.errors }}
+            </div>
+            <div>
+                Join Us Today <a href="{% url 'washapp:register' %}">Sign Up</a>
+            </div>
+        </div>
+
+    </div>
+
 
 {% endblock %}

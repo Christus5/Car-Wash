@@ -11,10 +11,15 @@
                 </div>
             {% endfor %}
             <button type="submit" class="btn">Sign Up</button>
+            <div class="error-messages">
+                {{ register_form.errors }}
+            </div>
+            <div>
+                Already Registered? <a href="{% url 'washapp:login' %}">Sign In</a>
+            </div>
         </form>
-        <div>
-            Already Registered? <a href="{% url 'washapp:login' %}">Sign In</a>
-        </div>
+
+
     </div>
 
 {% endblock %}

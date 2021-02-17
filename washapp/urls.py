@@ -7,6 +7,7 @@ app_name = 'washapp'
 
 urlpatterns = [
     path('', register_view, name='register'),
+    path('logout/', logout_view, name='logout'),
     path('login/', login_view, name='login'),
     path('home/', index_view, name='index'),
     path('employee/<int:employee_id>/', detail_view, name='detail'),

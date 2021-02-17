@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.template.defaulttags import register
 from django.core.paginator import Paginator
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from .models import Car
 
@@ -18,6 +19,7 @@ def get_range(value):
 
 
 # Create your views here.
+@login_required
 def index_view(request, *args, **kwargs):
     order_form = OrderForm()
 
@@ -36,6 +38,7 @@ def index_view(request, *args, **kwargs):
     return render(request, 'washapp/index.html', context)
 
 
+@login_required
 def cars_view(request, *args, **kwargs):
     cars_list = Car.objects.order_by('owner__car__license_plate')
 
@@ -54,6 +57,7 @@ def cars_view(request, *args, **kwargs):
     })
 
 
+@login_required
 def employees_view(request, *args, **kwargs):
     search = request.GET.get('name')
     employee_q = Q()
@@ -75,6 +79,7 @@ def employees_view(request, *args, **kwargs):
     })
 
 
+@login_required
 def detail_view(request, *args, **kwargs):
     employee = get_object_or_404(Account, pk=kwargs['employee_id'])
 
