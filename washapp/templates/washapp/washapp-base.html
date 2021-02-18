@@ -7,13 +7,13 @@
         </div>
         {% if request.user.is_authenticated %}
             <div class="login-links">
-                <a href="{% url 'washapp:logout' %}">Log Out</a>
+                <a href="{% url 'users:logout' %}">Log Out</a>
                 <a href="{% url 'washapp:detail' request.user.id %}"><img src="{{ request.user.avatar.url }}" class="avatar"/></a>
             </div>
         {% else %}
             <div class="login-links">
-                <a href="{% url 'washapp:login' %}">Login</a>
-                <a href="{% url 'washapp:register' %}">Register</a>
+                <a href="{% url 'users:login' %}">Login</a>
+                <a href="{% url 'users:register' %}">Register</a>
             </div>
         {% endif %}
     </nav>
