@@ -17,6 +17,33 @@ class OrderForm(forms.ModelForm):
                                     queryset=Account.objects.filter(is_staff=True, is_admin=False))
     price = forms.DecimalField(min_value=0)
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+
+        if self.user.type == 'customer':
+            self.fields['car'] = forms.ModelChoiceField(empty_label='Select Car', queryset=self.user.car_set.all())
+            self.fields['requested'].label = "When to be completed"
+
+            fields = {**self.fields}
+
+            for field in fields:
+                if field != 'car' and field != 'requested':
+                    self.fields.pop(field)
+
     class Meta:
         model = Order
         fields = '__all__'
+
+
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        if self.user == 'customer':
+            self.fields['owner'].widgets.attrs['readonly'] = True
+

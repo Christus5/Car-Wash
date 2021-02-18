@@ -1,5 +1,6 @@
+from django import forms
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.template.defaulttags import register
 from django.core.paginator import Paginator
@@ -10,7 +11,7 @@ from .models import Car
 
 from users.models import Account
 
-from .forms import OrderForm
+from .forms import *
 
 
 @register.filter
@@ -18,10 +19,10 @@ def get_range(value):
     return range(value + 1)
 
 
-# Create your views here.
-@login_required
 def index_view(request, *args, **kwargs):
-    order_form = OrderForm()
+    user = request.user
+
+    order_form = OrderForm(user=user)
 
     if request.POST:
         order_form = OrderForm(request.POST)
@@ -31,16 +32,43 @@ def index_view(request, *args, **kwargs):
 
     context = {
         'order_form': order_form,
-        'car_count': Car.objects.count(),
+        'car_count': Car.objects.filter(owner=user).count(),
         'employee_count': Account.objects.filter(is_staff=True, is_admin=False).count()
     }
 
-    return render(request, 'washapp/index.html', context)
+    return render(request, 'washapp/index/index.html', context)
+
+
+def index_view_customer(request, *args, **kwargs):
+    cars = request.user.car_set.all()
+    user = request.user
+
+    order_form = OrderForm(user=user)
+
+    return render(request, 'washapp/index/index_customer.html', {
+        'car_count': cars.count(),
+        'cars': cars,
+        'order_form': order_form
+    })
+
+
+@login_required
+def index_view_router(request, *args, **kwargs):
+    user = request.user
+    view = {
+        'customer': index_view_customer(request, *args, **kwargs),
+        'employee': index_view(request, *args, **kwargs),
+        'employer': index_view(request, *args, **kwargs)
+    }
+
+    return view[user.type]
 
 
 @login_required
 def cars_view(request, *args, **kwargs):
-    cars_list = Car.objects.order_by('owner__car__license_plate')
+    user = request.user
+    car_form = CarForm(user=user)
+    cars_list = user.car_set.all().order_by('owner__car__license_plate')
 
     paginator = Paginator(cars_list, 3)
     page = request.GET.get('page')
@@ -53,6 +81,7 @@ def cars_view(request, *args, **kwargs):
 
     return render(request, 'washapp/cars.html', {
         'cars': cars,
+        'car_form': car_form,
         'page': paginator.page(page)
     })
 
@@ -81,6 +110,8 @@ def employees_view(request, *args, **kwargs):
 
 @login_required
 def detail_view(request, *args, **kwargs):
+    if not request.user.is_staff:
+        return redirect(to='washapp:index')
     employee = get_object_or_404(Account, pk=kwargs['employee_id'])
 
     orders_by = request.GET.get('orders_by')

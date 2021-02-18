@@ -37,12 +37,20 @@ class Account(AbstractBaseUser):
     avatar = models.ImageField(default='washapp/no_image.svg', upload_to='washapp/employees/')
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+
+    TYPE = (
+        ('customer', "Customer"),
+        ('employee', "Employee"),
+        ('employer', 'Employer')
+    )
+
+    type = models.CharField(choices=TYPE, max_length=100, null=True, blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ('email',)
