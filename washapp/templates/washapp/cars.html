@@ -3,17 +3,29 @@
 {% block content %}
 
     <section class="page-content">
+        <h2>My Cars</h2>
         <div class="grid">
             {% for car in cars %}
                 <div class="card">
                     <header>
                         <h3>{{ car }}</h3>
                     </header>
+                    <section>
+                        <p>Active: {{ car.is_active }}</p>
+                    </section>
                 </div>
             {% endfor %}
         </div>
 
         {% include 'washapp/components/paginator.html' %}
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ car_form }}
+                <button class="btn" type="submit">Add Car</button>
+            </form>
+        </div>
     </section>
 
 {% endblock content %}

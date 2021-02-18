@@ -15,6 +15,7 @@ urlpatterns = [
     path('employee/<int:employee_id>/', detail_view, name='detail'),
     path('cars/', cars_view, name='cars'),
     path('employees/', employees_view, name='employees'),
+    path('inbox', inbox_view, name='inbox')
 
 
 ]

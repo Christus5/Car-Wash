@@ -67,8 +67,16 @@ def index_view_router(request, *args, **kwargs):
 @login_required
 def cars_view(request, *args, **kwargs):
     user = request.user
-    car_form = CarForm(user=user)
     cars_list = user.car_set.all().order_by('owner__car__license_plate')
+
+    car_form = CarForm()
+
+    if request.method == 'POST':
+        car_form = CarForm(request.POST)
+        if car_form.is_valid():
+            license_plate = car_form.save(commit=False)
+            Car.objects.create(license_plate=license_plate, owner=user)
+            return redirect('washapp:index')
 
     paginator = Paginator(cars_list, 3)
     page = request.GET.get('page')
@@ -135,4 +143,20 @@ def detail_view(request, *args, **kwargs):
         'employee': employee,
         'orders': orders,
         'page': paginator.page(page)
+    })
+
+@login_required
+def inbox_view(request, *args, **kwargs):
+    if not request.user.is_superuser:
+        return redirect(to='washapp:index')
+
+    cars = Car.objects.filter(is_active=False)
+
+    if request.method == 'POST':
+        car = Car.objects.get(pk = request.POST['car_id'])
+        car.is_active = True
+        car.save()
+
+    return render(request, 'washapp/inbox/admin_inbox.html', {
+        'cars': cars
     })

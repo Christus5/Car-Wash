@@ -1,0 +1,36 @@
+{% extends 'washapp/washapp-base.html' %}
+
+{% block content %}
+
+    <section class="page-content">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Car</th>
+                <th>Owner</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for car in cars %}
+                <tr>
+                    <td>
+                        {{ car }}
+                    </td>
+                    <td>
+                        {{ car.owner }}
+                    </td>
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input name="car_id" value="{{ car.pk }}" hidden/>
+                            <button type="submit" class="btn">Activate</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

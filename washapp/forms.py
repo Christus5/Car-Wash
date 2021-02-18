@@ -39,11 +39,6 @@ class OrderForm(forms.ModelForm):
 class CarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = '__all__'
+        fields = ('license_plate',)
 
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super().__init__(*args, **kwargs)
-        if self.user == 'customer':
-            self.fields['owner'].widgets.attrs['readonly'] = True
 

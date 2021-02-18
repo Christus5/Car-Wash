@@ -20,6 +20,7 @@ class CarWashBooth(models.Model):
 class Car(models.Model):
     license_plate = models.CharField(max_length=7, unique=True)
     owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.license_plate
