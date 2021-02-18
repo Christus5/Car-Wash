@@ -7,6 +7,13 @@
             <header>
                 <a href="{% url 'washapp:inbox' %}">Inbox</a>
             </header>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+
             <section class="grid" style="grid-template-columns: 1fr 1fr;">
                 <div class="card large">
                     <header>
@@ -43,7 +50,7 @@
 
                 </header>
                 <section>
-                    <form class="order-form" method="post">
+                    <form class="form" method="post">
                         {% csrf_token %}
                         {{ order_form }}
                         <button type="submit" class="btn">Place</button>

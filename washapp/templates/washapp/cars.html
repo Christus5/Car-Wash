@@ -9,9 +9,17 @@
                 <div class="card">
                     <header>
                         <h3>{{ car }}</h3>
+
                     </header>
                     <section>
                         <p>Active: {{ car.is_active }}</p>
+                        <br/>
+
+                        <form action="{% url 'washapp:delete_car' car.pk %}">
+                            <button class="btn btn-warning">
+                                Delete
+                            </button>
+                        </form>
                     </section>
                 </div>
             {% endfor %}
@@ -19,12 +27,21 @@
 
         {% include 'washapp/components/paginator.html' %}
 
-        <div>
-            <form method="post">
+        <div class="form-wrapper">
+            <form class="form" method="post">
                 {% csrf_token %}
-                {{ car_form }}
+                {% for field in car_form %}
+                    {{ field.label }}
+                    {{ field }}
+                {% endfor %}
                 <button class="btn" type="submit">Add Car</button>
             </form>
+            {% if car_form.errors %}
+                <div class="error-messages">
+                    {{ car_form.errors }}
+                </div>
+
+            {% endif %}
         </div>
     </section>
 

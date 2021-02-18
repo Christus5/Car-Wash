@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
@@ -48,7 +50,9 @@ def index_view_customer(request, *args, **kwargs):
     return render(request, 'washapp/index/index_customer.html', {
         'car_count': cars.count(),
         'cars': cars,
-        'order_form': order_form
+        'order_form': order_form,
+        'messages': get_messages(request)
+
     })
 
 
@@ -92,6 +96,21 @@ def cars_view(request, *args, **kwargs):
         'car_form': car_form,
         'page': paginator.page(page)
     })
+
+
+def delete_car(request, *args, **kwargs):
+    car_id = kwargs['pk']
+    user = request.user
+    try:
+        car = user.car_set.get(pk=car_id)
+    except:
+        messages.add_message(request, 40, "Couldn't find car!")
+        return redirect(to='washapp:index')
+
+    if car is not None:
+        car.delete()
+
+    return redirect(to='washapp:index')
 
 
 @login_required
@@ -145,6 +164,7 @@ def detail_view(request, *args, **kwargs):
         'page': paginator.page(page)
     })
 
+
 @login_required
 def inbox_view(request, *args, **kwargs):
     if not request.user.is_superuser:
@@ -153,7 +173,7 @@ def inbox_view(request, *args, **kwargs):
     cars = Car.objects.filter(is_active=False)
 
     if request.method == 'POST':
-        car = Car.objects.get(pk = request.POST['car_id'])
+        car = Car.objects.get(pk=request.POST['car_id'])
         car.is_active = True
         car.save()
 

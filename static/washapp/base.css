@@ -251,27 +251,36 @@ a.btn:hover {
     margin: 50px auto 35px;
 }
 
-.order-form {
+.form {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.order-form > *:not(label) {
+.form > *:not(label) {
     padding: 0.4em 0;
     margin: 5px auto;
     width: 70%;
     box-sizing: border-box;
     transition: 0.3s ease-out;
     outline: none;
+    text-align: center;
 }
 
-.order-form > *:not(label):focus {
+.form > *:not(label):focus {
     width: 99%;
     border: 1px solid var(--lime);
     box-shadow: 0 0 20px -5px var(--lime);
 }
 
+.form-wrapper {
+    width: 55%;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px 5px var(--graphite);
+}
 
 /* end order form */
 /* grid */

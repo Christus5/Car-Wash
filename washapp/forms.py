@@ -22,7 +22,10 @@ class OrderForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         if self.user.type == 'customer':
-            self.fields['car'] = forms.ModelChoiceField(empty_label='Select Car', queryset=self.user.car_set.all())
+            self.fields['car'] = forms.ModelChoiceField(
+                empty_label='Select Car',
+                queryset=self.user.car_set.filter(is_active=True)
+            )
             self.fields['requested'].label = "When to be completed"
 
             fields = {**self.fields}
