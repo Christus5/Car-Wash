@@ -1,17 +1,11 @@
-from django import forms
 from django.contrib import messages
-from django.contrib.messages import get_messages
-from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
-from django.template.defaulttags import register
-from django.core.paginator import Paginator
-from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
-from .models import Car
-
-from users.models import Account
+from django.contrib.messages import get_messages
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template.defaulttags import register
 
 from .forms import *
 
@@ -43,9 +37,8 @@ def index_view(request, *args, **kwargs):
 
 def index_view_customer(request, *args, **kwargs):
     cars = request.user.car_set.all()
-    user = request.user
 
-    order_form = OrderForm(user=user)
+    order_form = OrderForm(user=request.user)
 
     return render(request, 'washapp/index/index_customer.html', {
         'car_count': cars.count(),
@@ -58,14 +51,13 @@ def index_view_customer(request, *args, **kwargs):
 
 @login_required
 def index_view_router(request, *args, **kwargs):
-    user = request.user
     view = {
         'customer': index_view_customer(request, *args, **kwargs),
         'employee': index_view(request, *args, **kwargs),
         'employer': index_view(request, *args, **kwargs)
     }
 
-    return view[user.type]
+    return view.get(getattr(request.user, 'type', None), index_view_customer(request, *args, **kwargs))
 
 
 @login_required

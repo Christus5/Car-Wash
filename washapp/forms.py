@@ -9,7 +9,7 @@ class OrderForm(forms.ModelForm):
     }))
     completed = forms.DateTimeField(widget=forms.DateInput(attrs={
         'type': 'datetime-local'
-    }))
+    }), label='When to be completed')
 
     car = forms.ModelChoiceField(empty_label='Select Car', queryset=Car.objects.all())
     wash_booth = forms.ModelChoiceField(empty_label='Select Booth', queryset=CarWashBooth.objects.all())
@@ -18,21 +18,15 @@ class OrderForm(forms.ModelForm):
     price = forms.DecimalField(min_value=0)
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
 
-        if self.user.type == 'customer':
-            self.fields['car'] = forms.ModelChoiceField(
+        if user.type == 'customer':
+            self.fields = {'completed': self.fields['completed'], 'car': forms.ModelChoiceField(
                 empty_label='Select Car',
-                queryset=self.user.car_set.filter(is_active=True)
-            )
-            self.fields['requested'].label = "When to be completed"
+                queryset=user.car_set.filter(is_active=True)
+            )}
 
-            fields = {**self.fields}
-
-            for field in fields:
-                if field != 'car' and field != 'requested':
-                    self.fields.pop(field)
 
     class Meta:
         model = Order
@@ -43,5 +37,3 @@ class CarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = ('license_plate',)
-
-

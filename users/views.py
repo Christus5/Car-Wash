@@ -1,6 +1,8 @@
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from users.forms import *
 
@@ -42,3 +44,11 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     logout(request)
     return redirect(settings.LOGIN_URL)
+
+
+class PasswordResetView(auth_views.PasswordResetView):
+    success_url = reverse_lazy('users:password_reset_done')
+
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    success_url = reverse_lazy('users:password_reset_complete')
